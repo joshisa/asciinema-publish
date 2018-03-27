@@ -1,0 +1,62 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+  creationTimestamp: null
+  labels:
+    app: phoenix
+  name: phoenix
+  namespace: ascii
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: phoenix
+    spec:
+      containers:
+      - env:
+        - name: DATABASE_URL
+          value: postgresql://postgres:postgres@asciinema-postgresql.ascii.svc.cluster.local/postgres
+        - name: HOME_ASCIICAST_ID
+          value: "1"
+        - name: GMAIL_USERNAME
+          value: boilerupnc@gmail.com
+        - name: GMAIL_PASSWORD
+          value: Arr0whead
+        - name: REDIS_URL
+          value: redis://:0cPvIKUQhU@asciired-redis.ascii.svc.cluster.local:6379
+        - name: SECRET_KEY_BASE
+          value: TIHKAoKww8J1MxcH5UCQGzC0F7P0PBxsqM+hGmqrcrThdScXBMdSYb7K45nkwqFX
+        - name: URL_HOST
+          value: "9.37.239.93"
+        - name: URL_PORT
+          value: "80"
+        - name: URL_SCHEME
+          value: http
+        - name: RAILS_RELATIVE_URL_ROOT
+          value: myasciinema
+        - name: MIX_ENV
+          value: dev
+        image: mycluster.icp:8500/default/asciinema-k8s:v1.0.0
+        command: ["/bin/sh", "-c"]
+        args: ["mix deps.get; mix ecto.setup; mix phx.server"]
+        name: asciinema-phoenix
+        resources: {}
+        volumeMounts:
+        - mountPath: /app/uploads
+          name: phoenix-claim0
+        - mountPath: /tmp
+          name: phoenix-claim1
+      restartPolicy: Always
+      volumes:
+      - name: phoenix-claim0
+        persistentVolumeClaim:
+          claimName: ascii-claim0
+      - name: phoenix-claim1
+        persistentVolumeClaim:
+          claimName: ascii-claim2
+status: {}

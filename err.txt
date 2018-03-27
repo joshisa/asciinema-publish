@@ -1,0 +1,186 @@
+        (phoenix) lib / phoenix / controller.ex: 396: Phoenix.Controller.redirect( % Plug.Conn {
+          adapter: {
+            Plug.Adapters.Cowboy.Conn,
+            : ...
+          },
+          assigns: % {
+            current_user: % Asciinema.Accounts.User {
+              __meta__: #Ecto.Schema.Metadata < : loaded,
+              "users" > ,
+              api_tokens: #Ecto.Association.NotLoaded < association: api_tokens is not loaded > ,
+              asciicasts: #Ecto.Association.NotLoaded < association: asciicasts is not loaded > ,
+              asciicasts_private_by_default: true,
+              auth_token: "ClgGgRmPKvPIynwcQeoJ",
+              created_at: ~N[2018 - 03 - 16 06: 40: 42.679925],
+              email: "boilerupnc@gmail.com",
+              id: 2,
+              last_login_at: #DateTime < 2018 - 03 - 16 07: 04: 49.750001 Z > ,
+              name: nil,
+              temporary_username: nil,
+              theme_name: nil,
+              updated_at: ~N[2018 - 03 - 16 07: 04: 49.771197],
+              username: nil
+            }
+          },
+          before_send: [#Function < 0.96292254 / 1 in Plug.CSRFProtection.call / 2 > , #Function < 4.57612096 / 1 in Phoenix.Controller.fetch_flash / 2 > , #Function < 0.112984571 / 1 in Plug.Session.before_send / 2 > , #Function < 1.3875186 / 1 in Plug.Logger.call / 2 > ],
+          body_params: % {
+            "_csrf_token" => "cDUeIgJVbQU4UBU/RUUQeU4jBSpzNgAACx5dR85jzhMXwwC+aLpKEQ==",
+            "_utf8" => "✓"
+          },
+          cookies: % {
+            "_asciinema_session" => "R0FJOUJVZXMwTTA2VGJNdVQwWE5FVFRCUCtFUWxTZWNpZ05lbVAreFIzOUVQSlNWQ1V1UG51TnY3eFFlcFBhKy9nRnE3RksvYUp4bVF1K2NQZGY5RFpBZGxrOE44V1RWWlFiMDdSbkNXbVhFZ2R1cmxWd0JlWEhFUnd5RjBMQWhGQ1RsbjdSVkFTN0pKdTFuUkp6L2FFYi84VVI1YjlPS0FqaHNMQTRtMU83S1B4SjdUcWIwWEdqZ3VIei9KL2hjc2xWVEtrVWFwNjFFS2NpbmhvRDVmTEFpSlRTOEpzVXYwRjJva1luakd6Z2NCWUc2Z0dDdHZYc2ZWamlyVTh5QUR6elJ2MFhnelRHa0lLblNkMmZhekNtVmNyak1semdzekhkekdFZ2NXTFU9LS1LOWdyTTJmZnZ2dk11M3ZmTjlqTUlRPT0%3D--dea479770b16cc050ae232d384e2848b3ee07316",
+            "auth_token" => "ClgGgRmPKvPIynwcQeoJ"
+          },
+          halted: false,
+          host: "9.37.239.93",
+          method: "POST",
+          owner: #PID < 0.638 .0 > ,
+          params: % {
+            "_csrf_token" => "cDUeIgJVbQU4UBU/RUUQeU4jBSpzNgAACx5dR85jzhMXwwC+aLpKEQ==",
+            "_utf8" => "✓"
+          },
+          path_info: ["session"],
+          path_params: % {},
+          peer: {
+            {
+              10,
+              1,
+              221,
+              78
+            },
+            37186
+          },
+          port: 80,
+          private: % {
+            AsciinemaWeb.Router => {
+              [],
+              % {}
+            },
+            : phoenix_action => : create,
+            : phoenix_controller => AsciinemaWeb.SessionController,
+            : phoenix_endpoint => AsciinemaWeb.Endpoint,
+            : phoenix_flash => % {},
+            : phoenix_format => "html",
+            : phoenix_layout => {
+              AsciinemaWeb.LayoutView,
+              : app
+            },
+            : phoenix_pipelines => [: browser],
+            : phoenix_router => AsciinemaWeb.Router,
+            : phoenix_view => AsciinemaWeb.SessionView,
+            : plug_session => % {
+              "_csrf_token" => "3M+FPmXoB8Xg22SR/oua6g==",
+              "flash" => % {
+                discard: [],
+                flashes: % {
+                  notice: "Welcome back!"
+                }
+              },
+              "session_id" => "dc0468816bd4a608c446d93133ee9962",
+              "warden.user.user.key" => 2
+            },
+            : plug_session_fetch => : done,
+            : plug_session_info => : write
+          },
+          query_params: % {},
+          query_string: "",
+          remote_ip: {
+            10,
+            1,
+            221,
+            78
+          },
+          req_cookies: % {
+            "_asciinema_session" => "R0FJOUJVZXMwTTA2VGJNdVQwWE5FVFRCUCtFUWxTZWNpZ05lbVAreFIzOUVQSlNWQ1V1UG51TnY3eFFlcFBhKy9nRnE3RksvYUp4bVF1K2NQZGY5RFpBZGxrOE44V1RWWlFiMDdSbkNXbVhFZ2R1cmxWd0JlWEhFUnd5RjBMQWhGQ1RsbjdSVkFTN0pKdTFuUkp6L2FFYi84VVI1YjlPS0FqaHNMQTRtMU83S1B4SjdUcWIwWEdqZ3VIei9KL2hjc2xWVEtrVWFwNjFFS2NpbmhvRDVmTEFpSlRTOEpzVXYwRjJva1luakd6Z2NCWUc2Z0dDdHZYc2ZWamlyVTh5QUR6elJ2MFhnelRHa0lLblNkMmZhekNtVmNyak1semdzekhkekdFZ2NXTFU9LS1LOWdyTTJmZnZ2dk11M3ZmTjlqTUlRPT0%3D--dea479770b16cc050ae232d384e2848b3ee07316"
+          },
+          req_headers: [{
+            "x-real-ip",
+            "10.1.90.64"
+          }, {
+            "x-forwarded-for",
+            "9.85.200.95, 10.1.90.64"
+          }, {
+            "x-forwarded-proto",
+            "https"
+          }, {
+            "host",
+            "9.37.239.93"
+          }, {
+            "connection",
+            "close"
+          }, {
+            "content-length",
+            "92"
+          }, {
+            "x-forwarded-host",
+            "9.37.239.93"
+          }, {
+            "x-forwarded-port",
+            "443"
+          }, {
+            "x-original-uri",
+            "/myasciinema/session"
+          }, {
+            "x-scheme",
+            "https"
+          }, {
+            "cache-control",
+            "max-age=0"
+          }, {
+            "origin",
+            "https://9.37.239.93"
+          }, {
+            "upgrade-insecure-requests",
+            "1"
+          }, {
+            "content-type",
+            "application/x-www-form-urlencoded"
+          }, {
+            "user-agent",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36"
+          }, {
+            "accept",
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"
+          }, {
+            "dnt",
+            "1"
+          }, {
+            "referer",
+            "https://9.37.239.93/myasciinema/session/new"
+          }, {
+            "accept-language",
+            "en-US,en;q=0.9"
+          }, {
+            "cookie",
+            "_asciinema_session=R0FJOUJVZXMwTTA2VGJNdVQwWE5FVFRCUCtFUWxTZWNpZ05lbVAreFIzOUVQSlNWQ1V1UG51TnY3eFFlcFBhKy9nRnE3RksvYUp4bVF1K2NQZGY5RFpBZGxrOE44V1RWWlFiMDdSbkNXbVhFZ2R1cmxWd0JlWEhFUnd5RjBMQWhGQ1RsbjdSVkFTN0pKdTFuUkp6L2FFYi84VVI1YjlPS0FqaHNMQTRtMU83S1B4SjdUcWIwWEdqZ3VIei9KL2hjc2xWVEtrVWFwNjFFS2NpbmhvRDVmTEFpSlRTOEpzVXYwRjJva1luakd6Z2NCWUc2Z0dDdHZYc2ZWamlyVTh5QUR6elJ2MFhnelRHa0lLblNkMmZhekNtVmNyak1semdzekhkekdFZ2NXTFU9LS1LOWdyTTJmZnZ2dk11M3ZmTjlqTUlRPT0%3D--dea479770b16cc050ae232d384e2848b3ee07316"
+          }],
+          request_path: "/session",
+          resp_body: nil,
+          resp_cookies: % {
+            "auth_token" => % {
+              max_age: 31557600,
+              value: "ClgGgRmPKvPIynwcQeoJ"
+            }
+          },
+          resp_headers: [{
+            "cache-control",
+            "max-age=0, private, must-revalidate"
+          }, {
+            "x-request-id",
+            "3sg8245pch1sicns4obg0vn2kcfh1u6p"
+          }, {
+            "x-frame-options",
+            "SAMEORIGIN"
+          }, {
+            "x-xss-protection",
+            "1; mode=block"
+          }, {
+            "x-content-type-options",
+            "nosniff"
+          }],
+          scheme: : http,
+          script_name: [],
+          secret_key_base: "TIHKAoKww8J1MxcH5UCQGzC0F7P0PBxsqM+hGmqrcrThdScXBMdSYb7K45nkwqFX",
+          state: : unset,
+          status: nil
+        }, "/myasciinema/username/new")

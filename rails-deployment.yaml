@@ -1,0 +1,68 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: rails
+  name: rails
+  namespace: ascii
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: rails
+    spec:
+      containers:
+      - env:
+        - name: DATABASE_URL
+          value: postgresql://postgres:postgres@asciipost-postgresql.ascii.svc.cluster.local/postgres
+        - name: HOME_ASCIICAST_ID
+          value: "1"
+        - name: GMAIL_USERNAME
+          value: somefoo@gmail.com
+        - name: GMAIL_PASSWORD
+          value: not-telling
+        - name: REDIS_URL
+          value: redis://:asciinemarox@asciired-redis.ascii.svc.cluster.local:6379
+        - name: SECRET_KEY_BASE
+          value: TIHKAoKww8J1MxcH5UCQGzC0F7P0PBxsqM+hGmqrcrThdScXBMdSYb7K45nkwqFX
+        - name: URL_HOST
+          value: "x.x.x.x"
+        - name: URL_PORT
+          value: "80"
+        - name: URL_SCHEME
+          value: http
+        - name: RAILS_RELATIVE_URL_ROOT
+          value: myasciinema
+        image: mycluster.icp:8500/ascii/asciinema:1.0.5
+        imagePullPolicy: Always
+        command: ["/bin/sh", "-c"]
+        args: ["bundle exec rake assets:precompile;rm /app/tmp/unicorn.pid;bundle exec unicorn -c /app/config/unicorn.rb"]
+        name: asciinema-rails
+        resources: {}
+        volumeMounts:
+        - mountPath: /app/uploads
+          name: rails-claim0
+        - mountPath: /app/log
+          name: rails-claim1
+        - mountPath: /tmp
+          name: rails-claim2
+        - mountPath: /app/tmp
+          name: rails-claim3
+      restartPolicy: Always
+      volumes:
+      - name: rails-claim0
+        persistentVolumeClaim:
+          claimName: ascii-claim0
+      - name: rails-claim1
+        persistentVolumeClaim:
+          claimName: ascii-claim1
+      - name: rails-claim2
+        persistentVolumeClaim:
+          claimName: ascii-claim2
+      - name: rails-claim3
+        persistentVolumeClaim:
+          claimName: ascii-claim3
+status: {}

@@ -1,0 +1,82 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: redis-master
+  namespace: ascii
+spec:
+  serviceName: "redis-master"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+        role: master
+        tier: backend
+    spec:
+      initContainers:
+      - name: "fix-non-root-permissions"
+        image: "busybox"
+        imagePullPolicy: "Always"
+        command: [ "chmod", "-R", "g+rwX", "/bitnami" ]
+        volumeMounts:
+        - name: datadir
+          mountPath: /bitnami
+      securityContext:
+        runAsUser: 1001
+        fsGroup: 1001
+      containers:
+      - name: master
+        image: bitnami/redis:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        env:
+        - name: REDIS_REPLICATION_MODE
+          valueFrom:
+            secretKeyRef:
+              name: redis-master-secrets
+              key: REDIS_REPLICATION_MODE
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redis-master-secrets
+              key: REDIS_PASSWORD
+        ports:
+        - containerPort: 6379
+          name: master
+        livenessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+        volumeMounts:
+        - name: datadir
+          mountPath: /bitnami
+  volumeClaimTemplates:
+  - metadata:
+      name: datadir
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+---
+apiVersion: v1
+data:
+  REDIS_REPLICATION_MODE: bWFzdGVy
+  REDIS_PASSWORD: YXNjaWluZW1hcm94
+kind: Secret
+metadata:
+  name: redis-master-secrets
+  namespace: ascii
+type: Opaque
