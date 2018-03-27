@@ -1,0 +1,7 @@
+#Let's see how we might list out files within a folder
+ls quilt/*.cli
+#Now that was easy.  Wasn't it!  {beers}
+#We can also alter the pace of the typing by using a series of angled brackets > at the beginning of the line
+>>> >>>Really fast typing
+>> >>Kinda slooooow typing
+> >Slooooooow

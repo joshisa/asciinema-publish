@@ -1,0 +1,7 @@
+#The motivation behind creating a scriptable approach for creating recordings is to:
+#  {harpoons}  Accelerate the creation of shareable terminal recording content
+#  {harpoons}  Provide a polished, consistent look and feel of the published content
+#  {harpoons}  Facilitate automated generation of content
+#  {fail}    Avoid slow typing and typos that can create noise for the viewer
+>>Let's see what a basic kubectl command looks like
+kubectl cluster-info
